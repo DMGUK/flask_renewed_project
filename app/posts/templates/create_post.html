@@ -4,13 +4,27 @@
 
 {% macro render_field(field, placeholder='') %}
     {% if field.name == 'title' %}
-        {{ field(placeholder='Enter the title of the post: ', class_='upper-corner-input') }}<br><br>
+        {{ field(placeholder='Enter new title of the post: ', class_='upper-corner-input') }}<br><br>
     {% elif field.name == 'text' %}
-        {{ field(placeholder='Enter the text of the post: ', class_='upper-corner-input') }}<br><br>
+        {{ field(placeholder='Enter new text of the post: ', class_='upper-corner-input') }}<br><br>
+    {% elif field.name == 'image_file' %}
+        <label for="{{ field.id }}" class="upper-corner-input custom-file-upload">
+            Choose file
+        </label>
+        {{ field(class_='upper-corner-input', style='display: none;') }}<br><br>
     {% elif field.name == 'type' %}
-        {{ field(placeholder=placeholder, label = 'Post Type', class_='typeSelection') }}<br><br>
+        {{ field(placeholder=placeholder, label='Post Type', class_='upper-corner-input') }}<br><br>
+    {% elif field.name == 'category' %}
+        {{ field(placeholder=placeholder, label='Post Category', class_='upper-corner-input') }}<br><br>
+    {% elif field.name == 'tag' %}
+        {{ field(class_='upper-corner-input custom-tag-select') }}<br><br>
     {% elif field.name == 'enabled' %}
-        {{ field.label }} {{ field(placeholder='Enable the post:') }}<br><br>
+        <label class="upper-corner-input">
+            Enable the post:
+        </label>
+        {{ field(class_='upper-corner-input') }}<br><br>
+    {% elif field.name == 'submit' %}
+        {{ field(placeholder=placeholder, class_='upper-corner-input underline') }}<br><br>
     {% else %}
         {{ field(placeholder=placeholder, class_='upper-corner-input') }}<br><br>
     {% endif %}
@@ -35,5 +49,9 @@
             {{ render_field(form.enabled) }}
             {{ render_field(form.submit) }}
         </form>
+
+        <br><br>
+        <a class="underline" href="{{ url_for('posts.view_posts') }}">Back to the list of posts</a>
+
     </div>
 {% endblock %}

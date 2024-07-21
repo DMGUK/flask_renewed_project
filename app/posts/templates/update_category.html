@@ -6,7 +6,7 @@
     {% if field.name == 'name' %}
         {{ field(placeholder='Enter the new name of the category: ', class_='upper-corner-input') }}<br><br>
     {% else %}
-        {{ field(placeholder=placeholder, class_='upper-corner-input') }}<br><br>
+        {{ field(placeholder=placeholder, class_='upper-corner-input underline') }}<br><br>
     {% endif %}
     {% if field.errors %}
         {% for error in field.errors %}
@@ -23,5 +23,8 @@
             {{ render_field(form.name) }}
             {{ render_field(form.submit) }}
         </form>
+
+        <a class="underline" href="{{ url_for('posts.view_posts') }}">Back to the list of posts</a>
+
     </div>
 {% endblock %}
