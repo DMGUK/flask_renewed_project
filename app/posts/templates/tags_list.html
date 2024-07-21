@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}List of Posts{% endblock %}
+
+{% block content %}
+<section>
+    <div class="pageSection">
+        <div>
+            <br>
+            <h2>List of current tags:</h2>
+            <br>
+            {% for tag in tags.items %}
+                <ul>
+                    <li>
+                        <h3><a class="postAnchor" href="{{ url_for('posts.view_tag', id=tag.id) }}">{{ tag.name }}</a></h3>
+                    </li>
+                </ul>
+            {% else %}
+                <ul>
+                    <li>
+                        <strong>There are no categories yet</strong>
+                    </li>
+                </ul>
+            {% endfor %}
+            <br>
+            <a class="underline" href="{{ url_for('posts.create_tag') }}">Create new tag</a>
+            <br><br>
+            <a class="underline" href="{{ url_for('posts.view_posts') }}">Back to the list of posts</a>
+
+
+            <div class="navContainer">
+                <div class="navPagination">
+                    <ul class="pagination">
+                        {% if tags.has_prev %}
+                        <li class="page-item">
+                            <a class="underline" href="{{ url_for('posts.view_tags', page=tags.prev_num) }}">Previous</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <span class="underline">Previous</span>
+                        </li>
+                        {% endif %}
+
+                        {% for page_num in tags.iter_pages() %}
+                            {% if page_num %}
+                                {% if tags.page == page_num %}
+                                <li class="page-item">
+                                    <span class="underline">{{ page_num }}</span>
+                                </li>
+                                {% else %}
+                                <li class="page-item">
+                                    <a class="underline" href="{{ url_for('posts.view_tags', page=page_num) }}">{{ page_num }}</a>
+                                </li>
+                                {% endif %}
+                            {% else %}
+                                <li class="page-item">
+                                    <span class="underline">...</span>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if tags.has_next %}
+                        <li class="page-item">
+                            <a class="underline" href="{{ url_for('posts.view_tags', page=tags.next_num) }}">Next</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <span class="underline">Next</span>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

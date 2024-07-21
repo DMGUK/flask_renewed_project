@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% macro render_field(field, placeholder='') %}
+    {% if field.name == 'username' %}
+        {{ field(placeholder='Enter your new username:', class_='upper-corner-input') }}<br><br>
+    {% elif field.name == 'email' %}
+        {{ field(placeholder='Enter your new email:', class_='upper-corner-input') }}<br><br>
+    {% elif field.name == 'bio' %}
+        {{ field(placeholder='Say a few words about yourself:', class_='upper-corner-input') }}<br><br>
+    {% elif field.name == 'image' %}
+        <label for="{{ field.id }}" class="upper-corner-input custom-file-upload">
+            Choose file
+        </label>
+        {{ field(class_='upper-corner-input', style='display: none;') }}<br><br>
+    {% elif field.name == 'submit' %}
+        <label for="{{ field.id }}" class="upper-corner-input custom-file-upload">
+            Submit changes
+        </label>
+        {{ field(class_='upper-corner-input', style='display: none;') }}<br><br>
+    {% else %}
+        {{ field(placeholder=placeholder, class_='upper-corner-input') }}<br><br>
+    {% endif %}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <p class="flash-error"><strong>{{ error }}</strong></p>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+{% block content %}
+    <div class="pageSection">
+        <br>
+        <h2>Update your account</h2>
+        <br>
+        <form id = "updateAccountForm" action="/update_account" method="POST" enctype="multipart/form-data" novalidate>
+            {{ update_account_form.csrf_token }}
+            {{ render_field(update_account_form.username) }}
+            {{ render_field(update_account_form.email) }}
+            {{ render_field(update_account_form.bio) }}
+            {{ render_field(update_account_form.image) }}
+            {{ render_field(update_account_form.submit) }}
+        </form>
+        <p><a href="{{ url_for('accounts.account') }}" class="underline">Back to the main account page</a></p>
+    </div>
+{% endblock %}

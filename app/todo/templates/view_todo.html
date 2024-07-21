@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section>
+        <div class="pageSection">
+            <h1>Name of the task: <span class="underline">{{ todo.title }}</span></h1>
+            <h2>Task description: <span class="underline">{{ todo.description }}</span></h2>
+            <h3>Status:
+                {% if todo.complete %}
+                    <span class="todoMessageCompleted"><strong>Completed</strong></span>
+                {% else %}
+                    <span class="todoMessageIncomplete"><strong>In progress</strong></span>
+                {% endif %}
+            </h3>
+            <br><br>
+
+            <h3>Actions: </h3>
+            {% if todo.complete %}
+            <a class="underline" href="/update_todo/{{ todo.id }}" role="button">Mark/Unmark as complete</a>
+            <br>
+            {% else %}
+            <a class="underline" href="/update_todo/{{ todo.id }}" role="button">Mark/Unmark as complete</a>
+            <br>
+            {% endif %}
+            <a class="underline" href="/delete_todo/{{ todo.id }}" role="button">Delete</a>
+            <br>
+            <a class="underline" href="/todo_list" role="button">Back to the main todo page</a>
+            <br>
+        </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section>
+        <div class="pageSection">
+            <h2>List of tasks: </h2>
+            <br>
+            {% for todo in todo_list %}
+                <ul>
+                    <li>
+                        <h3><a class="postAnchor" href="{{ url_for('todo.view_todo', todo_id=todo.id) }}">{{ todo.title }}</a></h3>
+                    </li>
+                </ul>
+            {% endfor %}
+            <br><br>
+            <a class="underline" href="{{ url_for('todo.create_todo') }}">Create new todo</a>
+        </div>
+  </section>
+{% endblock %}

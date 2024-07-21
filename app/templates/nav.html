@@ -1,0 +1,31 @@
+{% set menu_logged_in = {
+    'Home': url_for('mainpage.homepage'),
+    'Todo': url_for('todo.todo_list'),
+    'Posts': url_for('posts.view_posts'),
+    'My Account': url_for('accounts.account'),
+    'Logout': url_for('accounts.logout')
+} %}
+
+{% set menu_logged_out = {
+    'Home': url_for('mainpage.homepage'),
+    'Login': url_for('accounts.login'),
+    'Sign Up': url_for('accounts.signup')
+} %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark-gray">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        {% set menu_items = menu_logged_in if current_user.is_authenticated else menu_logged_out %}
+        {% for name, url in menu_items.items() %}
+          <li class="nav-item">
+            <center><a class="nav-link" href="{{ url }}">{{ name }}</a></center>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</nav>

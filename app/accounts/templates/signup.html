@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% macro render_field(field, placeholder='') %}
+    {% if field.name == 'username' %}
+        {{ field(placeholder='Enter your username: ') }}<br><br>
+    {% elif field.name == 'email' %}
+        {{ field(placeholder='Enter your email: ') }}<br><br>
+    {% elif field.name == 'password' %}
+        {{ field(placeholder='Enter your password: ') }}<br><br>
+    {% elif field.name == 'confirm_password' %}
+        {{ field(placeholder='Confirm your password: ') }}<br><br>
+    {% elif field.name == 'image_file' %}
+        Choose your user image : {{ field(placeholder=placeholder) }}<br><br>
+    {% else %}
+        {{ field(placeholder=placeholder) }}<br><br>
+    {% endif %}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <p class="flash-error"><strong>{{ error }}</strong></p>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+{% block content %}
+    <div class="pageSection">
+        <h2>Sign Up form</h2><br>
+        <form action="/signup" method="POST" novalidate enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            {{ render_field(form.username) }}
+            {{ render_field(form.email) }}
+            {{ render_field(form.password) }}
+            {{ render_field(form.confirm_password) }}
+
+            {{ render_field(form.image_file) }}
+            {{ render_field(form.submit) }}
+        </form>
+    </div>
+{% endblock %}

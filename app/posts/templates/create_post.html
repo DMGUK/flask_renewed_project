@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Create New Post{% endblock %}
+
+{% macro render_field(field, placeholder='') %}
+    {% if field.name == 'title' %}
+        {{ field(placeholder='Enter the title of the post: ', class_='upper-corner-input') }}<br><br>
+    {% elif field.name == 'text' %}
+        {{ field(placeholder='Enter the text of the post: ', class_='upper-corner-input') }}<br><br>
+    {% elif field.name == 'type' %}
+        {{ field(placeholder=placeholder, label = 'Post Type', class_='typeSelection') }}<br><br>
+    {% elif field.name == 'enabled' %}
+        {{ field.label }} {{ field(placeholder='Enable the post:') }}<br><br>
+    {% else %}
+        {{ field(placeholder=placeholder, class_='upper-corner-input') }}<br><br>
+    {% endif %}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <p class="flash-error"><strong>{{ error }}</strong></p>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+{% block content %}
+    <div class="pageSection">
+        <h2>Create New Post</h2>
+        <form method="POST" id="postForm" action="{{ url_for('posts.create_post') }}" novalidate enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            {{ render_field(form.title) }}
+            {{ render_field(form.text) }}
+            {{ render_field(form.image_file) }}
+            {{ render_field(form.type) }}
+            {{ render_field(form.category) }}
+            {{ render_field(form.tag) }}
+            {{ render_field(form.enabled) }}
+            {{ render_field(form.submit) }}
+        </form>
+    </div>
+{% endblock %}

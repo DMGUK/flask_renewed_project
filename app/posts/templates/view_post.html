@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %} Posts {% endblock %}
+
+{% block content %}
+<section>
+    <div class="pageSection">
+        <img src="{{url_for('static', filename='posts_images/' + post.image_file)}}" width="600" height="400">
+        <br><br>
+        <h5>{{ post.type.name }}</h5>
+        <h1>{{ post.title }}</h1>
+        <h5>By {{ post.user.username }}</h5>
+        <h5>Created at:  {{ created_at }}</h5>
+        <h5>Category:  {{ category }}</h5>
+        <h5>
+            {% if post.tags|length != 0 %}
+                Tags:
+                {% for tag in post.tags %}
+                    #{{tag.name}}
+                {% endfor %}
+            {% else %}
+
+            {%endif%}
+        </h5>
+        <div>
+            <p>{{ post.text }}</p>
+        </div>
+        <br>
+        <div class="databaseOutputButtons">
+            <a class="underline" href="{{ url_for('posts.update_post', id=post.id) }}">Update the post</a>
+            <br><br>
+            <a href="{{ url_for('posts.delete_post', id=post.id) }}"
+               onclick="return confirm('Are you sure you want to delete this post?');"
+               class="underline">
+                Delete the post
+            </a>
+            <br><br>
+            <a class="underline" href="{{ url_for('posts.view_posts') }}">Back to the list of all posts</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

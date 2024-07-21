@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Create New Category{% endblock %}
+
+{% macro render_field(field, placeholder='') %}
+    {% if field.name == 'name' %}
+        {{ field(placeholder='Enter the name of the category: ', class_='upper-corner-input') }}<br><br>
+    {% else %}
+        {{ field(placeholder=placeholder, class_='upper-corner-input') }}<br><br>
+    {% endif %}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <p class="flash-error"><strong>{{ error }}</strong></p>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+{% block content %}
+    <div class="pageSection">
+        <h2>Create New Category</h2>
+        <form method="POST" id="categoryForm" action="{{ url_for('posts.create_category') }}" novalidate enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            {{ render_field(form.name) }}
+            {{ render_field(form.submit) }}
+        </form>
+    </div>
+{% endblock %}

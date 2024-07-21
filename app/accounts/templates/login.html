@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% macro render_field(field, placeholder='') %}
+    {% if field.name == 'remember' %}
+        {{ field.label }} {{ field(placeholder='Keep me logged in') }}<br><br>
+    {% elif field.name == 'password' %}
+        {{ field(placeholder='Enter your password: ') }}<br><br>
+    {% elif field.name == 'email' %}
+        {{ field(placeholder='Enter your email: ') }}<br><br>
+    {% else %}
+        {{ field(placeholder=placeholder) }}<br><br>
+    {% endif %}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <p class="flash-error"><strong>{{ error }}</strong></p>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+{% block content %}
+    <div class="pageSection">
+        <h2>Login form</h2><br>
+        <form action="/login" method="POST" novalidate>
+            {{ form.csrf_token }}
+            {{ render_field(form.email) }}
+            {{ render_field(form.password) }}
+            {{ render_field(form.remember) }}
+            {{ render_field(form.submit) }}
+        </form>
+    </div>
+{% endblock %}

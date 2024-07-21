@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+
+body {
+    min-height: 100vh;
+    font-family: JetBrains Mono;
+    font-size: 22px;
+    background-color: #101010;
+    color: #4cb469;
+}
+
+.content {
+    flex: 1;
+}
+
+.nav-item{
+    font-size: 20px;
+}
+
+nav {
+    overflow: auto;
+}
+
+main {
+    overflow-x: hidden;
+}
+
+.flash-success{
+    color: #2c8a2c;
+    font-size: 24px;
+    padding: 10px;
+}
+
+.flash-error{
+    color: #bb2b2b;
+    font-size: 24px;
+    padding: 10px;
+}
+
+
+.pageSection{
+    padding: 10px;
+}
+
+.todoMessageCompleted{
+    color: #2e6221;
+    background-position: center;
+}
+
+.todoMessageIncomplete{
+    color: #e1cb7e;
+    background-position: center;
+}
+
+#updateAccountForm > #bio{
+    width: 1000px;
+    height: 300px;
+}
+
+.postAnchor{
+    text-decoration: none;
+}
+
+.navPagination{
+    border: none;
+    background: inherit;
+    margin-top: 20px;
+    background-position: center;
+    width: 300px;
+}
+
+.pagination > li{
+    border: none;
+    width: 300px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.navContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.jumbotron {
+    margin: 10px;
+    background-color: #101010;
+    color: #4cb469;
+}
+
+.nav-link{
+    color: #4cb469;
+    text-decoration: none;
+}
+
+.nav-link:hover{
+    color: #da855d;
+}
+
+.underline{
+    color: #da855d;
+}
+
+.nav-item{
+    width: 250px;
+}
+
+input, select, label, .card{
+    background-color: #101010;
+    color: #4cb469;
+    border: none;
+    outline-width: 0;
+}
+
+.page-item{
+    border: none;
+    outline-width: 0;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    cursor: pointer;
+    padding: 6px 12px;
+    border: 1px solid #4cb469;
+    border-radius: 4px;
+    background-color: #101010;
+    color: #4cb469;
+    font-family: JetBrains Mono;
+    font-size: 22px;
+}
+
+.custom-file-upload:hover {
+    background-color: #4cb469;
+    color: #101010;
+}
+
+.file-name {
+    font-family: JetBrains Mono;
+    font-size: 22px;
+    color: #4cb469;
+}
+
+/* Style the select input specifically */
+.custom-tag-select {
+    background-color: #101010;
+    color: #4cb469;
+    border: 1px solid #4cb469;
+    padding: 10px;
+    width: auto;
+    box-sizing: border-box;
+    font-family: 'JetBrains Mono', monospace;
+    height: 200px; /* Adjust height as needed */
+    overflow: hidden; /* Hide default scroll bar */
+    position: relative;
+}
+
+/*.custom-tag-select::-webkit-scrollbar {*/
+/*    width: 12px;*/
+/*}*/
+
+/*.custom-tag-select::-webkit-scrollbar-track {*/
+/*    background: #101010;*/
+/*}*/
+
+.custom-tag-select::-webkit-scrollbar-thumb {
+    background-color: #4cb469;
+    border-radius: 10px;
+    border: 3px solid #101010;
+}
+
+.custom-tag-select {
+    scrollbar-width: thin;
+    scrollbar-color: #4cb469 #101010;
+}
+
+.custom-tag-select::-ms-expand {
+    display: none;
+}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% macro render_field(field, placeholder='') %}
+    {% if field.id == 'title' %}
+        {{ field(placeholder="Enter the task's title: ") }}<br><br>
+    {% elif field.id == 'description' %}
+        {{ field(placeholder="Enter the task's description: ") }}<br><br>
+    {% else %}
+        {{ field(placeholder=placeholder, class='underline') }}<br><br>
+    {% endif %}
+    {% if field.errors %}
+        <ul class="errors">
+            {% for error in field.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}
+
+
+{% block content %}
+    <section>
+        <div class="pageSection">
+            <h2>Create todo</h2>
+            <form action="/add_todo" method="POST" class="todoForm" novalidate>
+                {{ todo_form.csrf_token }}
+                {{ render_field(todo_form.title) }}
+                {{ render_field(todo_form.description) }}
+                {{ render_field(todo_form.submit) }}
+            </form>
+        </div>
+  </section>
+{% endblock %}

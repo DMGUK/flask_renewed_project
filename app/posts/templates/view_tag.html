@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %} Current Tag {% endblock %}
+
+{% block content %}
+<section>
+    <div class="pageSection">
+        <h2>Tag : {{ tag.name }}</h2>
+        <br>
+        <h4>Links to the posts with the given tag : </h4>
+        <ul>
+            {% for post in posts %}
+                <li>
+                    <h5><a class="postAnchor" href="{{ url_for('posts.view_post', id=post.id) }}">{{ post.title }}</a></h5>
+                </li>
+                {% else %}
+                    <p>
+                        <h5>There are no posts assigned for to this tag</h5>
+                    </p>
+            {% endfor %}
+        </ul>
+        <br>
+        <div class="databaseOutputButtons">
+            <a class="underline" href="{{ url_for('posts.update_tag', id=tag.id) }}">Update the tag</a>
+            <br><br>
+            <a href="{{ url_for('posts.delete_tag', id=tag.id) }}"
+               onclick="return confirm('Are you sure you want to delete this tag?');"
+               class="underline">
+                Delete the tag
+            </a>
+            <br><br>
+            <a class="underline" href="{{ url_for('posts.view_tags') }}">Back to the list of all tags</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

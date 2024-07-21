@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}My Account{% endblock %}
+
+{% macro render_field(field, placeholder='') %}
+    {% if field.name == 'username' %}
+        {{ field(placeholder='Enter your new username:', class_='upper-corner-input') }}<br><br>
+    {% elif field.name == 'email' %}
+        {{ field(placeholder='Enter your new email:', class_='upper-corner-input') }}<br><br>
+    {% elif field.name == 'bio' %}
+        {{ field(placeholder='Say a few words about yourself:', class_='upper-corner-input') }}<br><br>
+    {% else %}
+        {{ field(placeholder=placeholder, class_='upper-corner-input') }}<br><br>
+    {% endif %}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <p class="flash-error"><strong>{{ error }}</strong></p>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+
+
+{% block content %}
+    <div class="pageSection">
+        <h2>{{ current_user.username }}</h2>
+        <p><b>{{ current_user.email }}</b></p>
+        <p><b>Last seen on {{ current_user.last_seen }}</b></p>
+        {% set profile_image_path = current_user.image_file %}
+
+        {% if profile_image_path %}
+            <img src="{{ url_for('static', filename='profile_images/' + profile_image_path) }}" alt="User Profile Image" width="200" height="200"><br><br>
+        {% else %}
+            <img src="{{ url_for('static', filename='profile_images/default.jpg') }}" alt="Default Profile Image" width="200" height="200"><br><br>
+        {% endif %}
+
+        <br>
+        <p><a href="/update_account" class="underline">Update your account</a></p>
+        <br>
+        <p><a href="/change_password" class="underline">Update your password</a></p>
+    </div>
+{% endblock %}
