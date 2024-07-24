@@ -5,15 +5,19 @@
         <div class="pageSection">
             <h2>List of tasks: </h2>
             <br>
-            {% for todo in todo_list %}
+            {% if todo_list|length == 0 %}
+                <h3>There are no todos yet</h3>
+            {% else %}
                 <ul>
-                    <li>
-                        <h3><a class="postAnchor" href="{{ url_for('todo.view_todo', todo_id=todo.id) }}">{{ todo.title }}</a></h3>
-                    </li>
+                    {% for todo in todo_list %}
+                        <li>
+                            <h3><a class="postAnchor" href="{{ url_for('todo.view_todo', todo_id=todo.id) }}">{{ todo.title }}</a></h3>
+                        </li>
+                    {% endfor %}
                 </ul>
-            {% endfor %}
+            {% endif %}
             <br><br>
             <a class="underline" href="{{ url_for('todo.create_todo') }}">Create new todo</a>
         </div>
-  </section>
+    </section>
 {% endblock %}

@@ -39,3 +39,5 @@ def create_app(config_name='development'):
         app.register_blueprint(todo)
         app.register_blueprint(posts)
     return app
+
+# postgresql://flask_renew_db_user:8i1EcgSdwYA0zrrkoNZji5GgpkrEan9W@dpg-cqggfmqju9rs73cdvg7g-a.frankfurt-postgres.render.com/flask_renew_db

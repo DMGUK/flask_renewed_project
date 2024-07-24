@@ -3,7 +3,7 @@ from datetime import timedelta
 
 from dotenv import load_dotenv
 
-load_dotenv('migrations/database_link.env')
+load_dotenv('database_link.env')
 app_root_path = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -18,7 +18,9 @@ class DevelopmentConfig(Config):
 
 class ProductionConfig(Config):
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = f'{os.getenv("DB_URL")}'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DB_URL')
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    FLASK_SECRET = SECRET_KEY
 
 class TestingConfig(Config):
     TESTING = True
