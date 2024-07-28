@@ -12,7 +12,6 @@
     {% elif field.name == 'confirm_password' %}
         {{ field(placeholder='Confirm your password: ') }}<br><br>
     {% elif field.name == 'image_file' %}
-        Choose your user image : {{ field(placeholder=placeholder) }}
         <label for="{{ field.name }}" class="upper-corner-input custom-file-upload">
             Choose file
         </label>
